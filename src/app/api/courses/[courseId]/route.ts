@@ -37,9 +37,15 @@ export async function DELETE(
       return new NextResponse("Not Found", { status: 404 });
     }
 
+    const list = await video.assets.list();
     for (const chapter of course.chapters) {
       if (chapter.muxData?.assetId) {
-        await video.assets.delete(chapter.muxData.assetId);
+        const assetExists = list.data.find(
+          (data) => data.id === chapter.muxData?.assetId
+        );
+        if (assetExists) {
+          await video.assets.delete(chapter.muxData.assetId);
+        }
       }
     }
 

@@ -50,7 +50,10 @@ export async function DELETE(
       });
 
       if (existingMuxData) {
-        await video.assets.delete(existingMuxData.assetId);
+        const list = await video.assets.list();
+        if (list.data.find(({ id }) => id === existingMuxData.assetId)) {
+          await video.assets.delete(existingMuxData.assetId);
+        }
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
@@ -131,7 +134,10 @@ export async function PATCH(
       });
 
       if (existingMuxData) {
-        await video.assets.delete(existingMuxData.assetId);
+        const list = await video.assets.list();
+        if (list.data.find(({ id }) => id === existingMuxData.assetId)) {
+          await video.assets.delete(existingMuxData.assetId);
+        }
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
