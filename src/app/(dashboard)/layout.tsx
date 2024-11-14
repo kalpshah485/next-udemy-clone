@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import Navbar from "./_components/navbar";
 import Sidebar from "./_components/sidebar";
 import { RedirectToSignIn, useAuth } from "@clerk/nextjs";

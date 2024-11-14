@@ -11,7 +11,7 @@ export const SearchInput = () => {
   const searchParams = useSearchParams();
   const currentTitle = searchParams.get("title");
   const [value, setValue] = useState(currentTitle ? currentTitle : "");
-  const debouncedValue = useDebounce(value);
+  const debouncedValue = useDebounce(value, 200);
 
   const router = useRouter();
   const pathname = usePathname();
